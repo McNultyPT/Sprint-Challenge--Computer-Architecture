@@ -42,6 +42,11 @@ enum alu_op {
 #define CALL 0b01010000
 #define RET  0b00010001
 
+#define CMP  0b10100111
+#define JMP  0b01010100
+#define JNE  0b01010110
+#define JEQ  0b01010101
+
 // Function declarations
 
 extern void cpu_load(struct cpu *cpu, int argc, char *argv[]);
