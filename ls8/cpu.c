@@ -150,7 +150,12 @@ void cpu_run(struct cpu *cpu) {
       case CMP:
         alu(cpu, ALU_CMP, operandA, operandB);
         break;
-      
+
+      case JMP:
+        cpu->PC = cpu->registers[operandA];
+        operands = 0;
+        break;
+       
       default:
         printf("unrecognized instruction\n");
         exit(1);
