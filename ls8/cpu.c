@@ -84,6 +84,21 @@ void alu(struct cpu *cpu, enum alu_op op, unsigned char regA, unsigned char regB
         cpu->FL = 0b00000010;
       }
       break;
+
+    case ALU_AND:
+      cpu->registers[regA] &= cpu->registers[regB];
+      break;
+
+    case ALU_OR:
+      cpu->registers[regA] |= cpu->registers[regB];
+      break;
+
+    case ALU_XOR:
+      cpu->registers[regA] ^= cpu->registers[regB];
+      break;
+
+    case ALU_NOT:
+      ~cpu->registers[regA];
   }
 }
 
@@ -169,6 +184,21 @@ void cpu_run(struct cpu *cpu) {
           operands = 0;
         }
         break;
+
+      case AND:
+        alu(cpu, ALU_AND, operandA, operandB);
+        break;
+
+      case OR:
+        alu(cpu, ALU_OR, operandA, operandB);
+        break;
+
+      case XOR:
+        alu(cpu, ALU_XOR, operandA, operandB);
+        break;
+
+      case NOT:
+        alu(cpu, ALU_NOT, operandA, NULL);
        
       default:
         printf("unrecognized instruction\n");
