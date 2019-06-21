@@ -155,6 +155,20 @@ void cpu_run(struct cpu *cpu) {
         cpu->PC = cpu->registers[operandA];
         operands = 0;
         break;
+
+      case JEQ:
+        if (cpu->FL == 0b00000001) {
+          cpu->PC = cpu->registers[operandA];
+          operands = 0;
+        }
+        break;
+
+      case JNE:
+        if ((cpu->FL == 0b00000001) == 0) {
+          cpu->PC = cpu->registers[operandA];
+          operands = 0;
+        }
+        break;
        
       default:
         printf("unrecognized instruction\n");
